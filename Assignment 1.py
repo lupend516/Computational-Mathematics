@@ -95,7 +95,6 @@ secant_root=secant_method(f,0,2,1e-6)
 print(f"Approximate bisection root: {bisection_root}")
 print(f"Approximate secant root: {secant_root}")
 
-Казыбек, [18.12.2024 04:36]
 def calculate_errors(true_value, approx_value):
     absolute_error=abs(true_value-approx_value) #absolute error
     relative_error=absolute_error/true_value if true_value !=0 else float("inf") # relative error
