@@ -3,10 +3,10 @@ import numpy as np
 
 def iterative_matrix_inversion(A, tol=1e-6):
     n = A.shape[0]
-    B = np.eye(n) / np.trace(A)  # Initial guess
+    B = np.eye(n) / np.trace(A)  
     I = np.eye(n)
     
-    for _ in range(1000):  # Set a reasonable max iteration count
+    for _ in range(1000):  
         R = I - A @ B
         B_next = B + B @ R
         if np.linalg.norm(R, ord=np.inf) < tol:
@@ -15,7 +15,7 @@ def iterative_matrix_inversion(A, tol=1e-6):
 
     return B
 
-A = np.array([[4, 7], [2, 6]])  # Replace with your matrix
+A = np.array([[4, 7], [2, 6]])  
 inv_A_iterative = iterative_matrix_inversion(A)
 inv_A_numpy = np.linalg.inv(A)
 
@@ -25,8 +25,8 @@ print("Inverse matrix (numpy):\n", inv_A_numpy)
 # Task 2: LU Factorization
 from scipy.linalg import lu
 
-A = np.array([[4, 3], [6, 3]])  # Replace with your matrix
-b = np.array([10, 12])  # Replace with your vector
+A = np.array([[4, 3], [6, 3]])  
+b = np.array([10, 12])  
 
 P, L, U = lu(A)
 x = np.linalg.solve(A, b)
@@ -48,7 +48,7 @@ def power_method(A, v0, tol=1e-6, max_iter=1000):
     eigenvalue = np.dot(v.T, A @ v)
     return eigenvalue, v
 
-A = np.array([[2, 1, 0], [1, 3, 1], [0, 1, 2]])  # Replace with your matrix
+A = np.array([[2, 1, 0], [1, 3, 1], [0, 1, 2]])  
 v0 = np.array([1, 0, 0])
 
 eigenvalue, eigenvector = power_method(A, v0)
@@ -61,13 +61,13 @@ print("Eigenvalues (numpy):", numpy_eigenvalues)
 # Task 4: Givens and Householder Reduction
 from scipy.linalg import qr
 
-A = np.array([[4, 3], [6, 3]])  # Replace with your matrix
+A = np.array([[4, 3], [6, 3]])  
 Q, R = qr(A, mode='full')
 
 print("Q matrix (Householder):\n", Q)
 print("R matrix (Householder):\n", R)
 
-# Givens method needs custom implementation (omitted here for brevity).
+
 
 # Task 5: Jacobi Method for All Eigenvalues
 def jacobi_method(A, tol=1e-6):
@@ -102,7 +102,7 @@ def jacobi_method(A, tol=1e-6):
     eigenvalues = np.diag(A)
     return eigenvalues, V
 
-A = np.array([[4, 2], [2, 3]])  # Replace with your matrix
+A = np.array([[4, 2], [2, 3]])  
 eigenvalues, eigenvectors = jacobi_method(A)
 numpy_eigenvalues = np.linalg.eigvals(A)
 
