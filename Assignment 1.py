@@ -9,14 +9,12 @@ def newton_raphson(f,df,x0,tol):
         x=x-f(x)/df(x) # Formula
     return x
 
-# definition af a function
 def f(x):
     return x**3-(2*(x**2))-5
 
 def df(x):
     return 3*x**2-4*x
 
-# using method
 root=newton_raphson(f,df,2.5,1e-6)
 print(f"Root: {root}")
 
@@ -50,12 +48,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def bisection_method(f,a,b,tol):
-    # we check that the root really lies in the interval [a, b]
     if f(a)*f(b) >= 0:
         print("Invalid initial values. f(a) and f(b) must be of different signs.")
         return None
 
-    # iteration for initialize counter
     iteration=0
     
     midpoint = (a+b)/2
@@ -70,23 +66,19 @@ def bisection_method(f,a,b,tol):
     return midpoint
 
 def secant_method(f, x0, x1, tol):
-    # iterative approximation of the root by the secant method
 
-    # iteration for initialize counter
     iteration=0
     
     while abs(f(x1)) > tol:
         iteration += 1
-        x_temp = x1-f(x1)*(x1-x0)/(f(x1)-f(x0)) # formula
-        x0, x1 = x1, x_temp # updating values
+        x_temp = x1-f(x1)*(x1-x0)/(f(x1)-f(x0)) 
+        x0, x1 = x1, x_temp 
     print(f"Secant iteration {iteration}")
     return x1
     
-# definition of a function 
 def f(x):
     return np.exp(x)-2*x-3
 
-# using bisection method
 bisection_root=bisection_method(f,0,2,1e-6)
 secant_root=secant_method(f,0,2,1e-6)
 print(f"Approximate bisection root: {bisection_root}")
@@ -108,7 +100,6 @@ secant_relative_error=calculate_errors(exact_value,secant_root)
 print(f"Bisection relative error {bisection_relative_error}")
 print(f"Secant relative error {secant_relative_error}")
 
-# Efficiency comparison
 if bisection_iteration < secant_iteration:
     print("Bisection Method is more efficient in this case.")
 elif secant_iteration < bisection_iteration:
@@ -135,24 +126,19 @@ def newton_raphson(f, df, x0, tol):
         x0=x
     return x,iterations
 
-# definition of a function and its derivative
 def f(x):
     return x**2-3*x+2
 def df(x):
     return 2*x-3
 
-# Using the method
 root, iterations= newton_raphson(f, df, 2.5, 1e-6)
 
-# Display Results
 print("Iteration Table")
 for i, x, abs_err, rel_err in iterations:
     print(f"Iteration {i}, Current Guess {x}, Absolute Error {abs_err}, Relative Error {rel_err}")
 
-# Display the results
 print(f"Root: {root}")
 
-# Convergence Graph (Absolute Error vs Iteration Number)
 iteration_nums = [it[0] for it in iterations]
 absolute_errors = [it[2] for it in iterations]
 
@@ -169,7 +155,6 @@ plt.show()
 x=np.linspace(0,3,500)
 y=f(x)
 
-# Plotting a graph
 plt.figure(figsize=(8, 6))
 plt.plot(x, y, label="f(x)=x^2-3x+2")
 plt.axhline(0, color='red', linestyle='--', label="y = 0")
@@ -189,7 +174,6 @@ import matplotlib.pyplot as plt
 import cmath # for working with complex numbers
 
 def muller_method(f, x0, x1, x2, tol, max_iter=100):
-    # Iterative root approximation by Muller's method
     for _ in range(max_iter):
         h0 = x1 - x0
         h1 = x2 - x1
@@ -231,7 +215,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def false_position_method(f, a, b, tol):
-    # We check that the root really lies in the interval [a, b]
     if f(a) * f(b) >= 0:
         print("Invalid initial values. f(a) and f(b) must be of different signs.")
         return None
@@ -243,24 +226,19 @@ def false_position_method(f, a, b, tol):
 
     while True:
         i += 1
-        # Compute the next approximation using the False Position formula
         c = b - f(b) * (b - a) / (f(b) - f(a))
         
-        # Calculate errors if previous approximation exists
         if prev_c is not None:
             abs_err = abs(c - prev_c)  # Absolute error
             rel_err = abs_err / abs(c) if c != 0 else np.inf  # Relative error
         else:
             abs_err, rel_err = np.inf, np.inf  # First iteration
 
-        # Store iteration details
         iterations.append((i, c, abs_err, rel_err))
 
-        # Check for convergence
         if abs(f(c)) <= tol:
             break
 
-        # Update the interval based on the sign of f(c)
         if f(a) * f(c) < 0:
             b = c
         else:
@@ -270,13 +248,11 @@ def false_position_method(f, a, b, tol):
 
     return c, iterations
 
-# Definition of a function
 def f(x):
     return x**2-2**x  
 def absolute_error(xapprox):
     return 
 
-# Using method
 root,iterations = false_position_method(f, 0, 3, 1e-6)
 
 print(f"Root: {root}")
@@ -284,7 +260,6 @@ print("Iteration Table")
 for i, c, abs_err, rel_err in iterations:
     print(f"Iteration {i}, Current Guess {c}, Absolute Error {abs_err}, Relative Error {rel_err}")
 
-# Plotting absolute error vs. iteration number
 abs_errors = [abs_err for _, _, abs_err, _ in iterations]
 plt.plot(range(1, len(abs_errors) + 1), abs_errors, marker='o', linestyle='-')
 plt.xlabel('Iteration Number')
@@ -301,13 +276,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def find_quadratic_roots(a, b, c):
-    # Quadratic formula to find the roots
     root1 = (-b + np.sqrt(b**2 - 4*a*c)) / (2*a)
     root2 = (-b - np.sqrt(b**2 - 4*a*c)) / (2*a)
     return root1, root2
 
 def fixed_point_iteration(g,x0,tol,max_iter, true_root):
-    # Iterative root approximation
     results=[]
     x=x0
     for i in range(max_iter):
@@ -321,7 +294,6 @@ def fixed_point_iteration(g,x0,tol,max_iter, true_root):
 
 def f(x):
     return x**2-6*x+5
-#  Transform the equation into the form x=g(x) 
 def g(x):
     return (x**2+5)/6
 
@@ -329,7 +301,6 @@ root1,root2=find_quadratic_roots(1, -6, 5)
 
 true_root=root2
 
-# Using method
 results = fixed_point_iteration(g, 0.5, 1e-6, 10, true_root)
 print(f"True root: {true_root}")
 print(f"Results")
