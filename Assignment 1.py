@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 def newton_raphson(f,df,x0,tol):
     x=x0
     while abs(f(x))>tol:
-        x=x-f(x)/df(x) # Formula
+        x=x-f(x)/df(x) 
     return x
 
 def f(x):
@@ -18,7 +18,7 @@ def df(x):
 root=newton_raphson(f,df,2.5,1e-6)
 print(f"Root: {root}")
 
-x=np.linspace(1,4,500) # Range of x values
+x=np.linspace(1,4,500) 
 y=f(x)
 
 plt.figure(figsize=(8,6))
@@ -85,13 +85,13 @@ print(f"Approximate bisection root: {bisection_root}")
 print(f"Approximate secant root: {secant_root}")
 
 def calculate_errors(true_value, approx_value):
-    absolute_error=abs(true_value-approx_value) #absolute error
-    relative_error=absolute_error/true_value if true_value !=0 else float("inf") # relative error
+    absolute_error=abs(true_value-approx_value) 
+    relative_error=absolute_error/true_value if true_value !=0 else float("inf") 
     return relative_error
 
-exact_value=1.923938694754772 # secant true_value
-bisection_root=1.9239387512207031 # bisection approx_value
-secant_root=1.923938694754772 # secant approx_value
+exact_value=1.923938694754772 
+bisection_root=1.9239387512207031 
+secant_root=1.923938694754772 
 bisection_iteration=18
 secant_iteration=5
 bisection_relative_error=calculate_errors(exact_value,bisection_root)
@@ -119,8 +119,8 @@ def newton_raphson(f, df, x0, tol):
     i=0
     while abs(f(x0))>tol:
         i+=1
-        x=x0-f(x0)/df(x0) # newton raphson formula
-        absolute_error=abs(x-x0) # x is true value x0 is approx value
+        x=x0-f(x0)/df(x0) 
+        absolute_error=abs(x-x0) 
         relative_error=absolute_error/x if x!=0 else float('inf')
         iterations.append((i, x, absolute_error, relative_error))
         x0=x
@@ -147,7 +147,7 @@ plt.plot(iteration_nums, absolute_errors, marker='o', label='Absolute Error')
 plt.xlabel("Iteration Number")
 plt.ylabel("Absolute Error")
 plt.title("Convergence of Newton-Raphson Method")
-plt.yscale('log')  # Log scale for better visualization of convergence
+plt.yscale('log') 
 plt.grid()
 plt.legend()
 plt.show()
@@ -171,8 +171,7 @@ plt.show()
 
 import numpy as np
 import matplotlib.pyplot as plt
-import cmath # for working with complex numbers
-
+import cmath 
 def muller_method(f, x0, x1, x2, tol, max_iter=100):
     for _ in range(max_iter):
         h0 = x1 - x0
@@ -189,9 +188,9 @@ def muller_method(f, x0, x1, x2, tol, max_iter=100):
         else:
             denominator = b - discriminant
 
-        x3 = x2 - (2 * c) / denominator  # Formula
+        x3 = x2 - (2 * c) / denominator  
 
-        if abs(x3 - x2) < tol:  # Stop condition
+        if abs(x3 - x2) < tol:  
             return x3
         x0, x1, x2 = x1, x2, x3
 
@@ -203,8 +202,7 @@ def f(x):
 
 root = muller_method(f, -1, 0, 1, 1e-6)
 result_value=f(root)
-absolute_error=abs(result_value) # absolute error abs(result_value-0)=abs(result_value)
-
+absolute_error=abs(result_value) 
 print(f"Root: {root}, Result: {result_value}, Absolute_error {absolute_error}")
 
 
@@ -219,20 +217,20 @@ def false_position_method(f, a, b, tol):
         print("Invalid initial values. f(a) and f(b) must be of different signs.")
         return None
     
-    iterations = []  # To store iteration details
-    c = a           # Initialize c as the lower bound
-    prev_c = None   # To calculate errors
-    i = 0           # Iteration counter
+    iterations = []  
+    c = a           
+    prev_c = None   
+    i = 0           
 
     while True:
         i += 1
         c = b - f(b) * (b - a) / (f(b) - f(a))
         
         if prev_c is not None:
-            abs_err = abs(c - prev_c)  # Absolute error
-            rel_err = abs_err / abs(c) if c != 0 else np.inf  # Relative error
+            abs_err = abs(c - prev_c)  
+            rel_err = abs_err / abs(c) if c != 0 else np.inf  
         else:
-            abs_err, rel_err = np.inf, np.inf  # First iteration
+            abs_err, rel_err = np.inf, np.inf  
 
         iterations.append((i, c, abs_err, rel_err))
 
@@ -244,7 +242,7 @@ def false_position_method(f, a, b, tol):
         else:
             a = c
         
-        prev_c = c  # Update previous c for next iteration
+        prev_c = c  
 
     return c, iterations
 
@@ -287,7 +285,7 @@ def fixed_point_iteration(g,x0,tol,max_iter, true_root):
         x_next = g(x)
         absolute_error=abs(true_root-x_next)
         results.append((i+1,x_next,absolute_error))
-        if abs(x_next - x) < tol:  # Checking convergence
+        if abs(x_next - x) < tol:  
             break
         x = x_next
     return results
