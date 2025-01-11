@@ -33,14 +33,11 @@ plt.legend()
 plt.grid()
 plt.show()
 
-Казыбек, [18.12.2024 04:32]
 def calculate_error(true_value, approx_value):
-    absolute_error=abs(true_value - approx_value) # absolute error
+    absolute_error=abs(true_value - approx_value) 
     return absolute_error
 
-# example of use
-true_value=2.6906474992568943 # true value
-approx_value=2.5 # approx value
+true_value=2.6906474992568943 
 absolute_error=calculate_error(true_value, approx_value)
 
 print(f"Absolute error: {absolute_error}")
